@@ -2,12 +2,21 @@
   apt: name=stow
   tags:
     - "dotfiles"
+    - "stow"
 - name: clone dotfiles
   ansible.builtin.git:
     repo: https://github.com/xjojorx/.dotfiles.git
     dest: "~/.dotfiles"
+    update: yes
+    recursive: yes
+  tags:
+    - "dotfiles"
+    - "stow"
 - name: unstow dotfiles
-  ansible.builtin.command: stow *
+  shell: stow --adopt * && git restore . && stow -R *
   args:
     chdir: ~/.dotfiles/
+  tags:
+    - "dotfiles"
+    - "stow"
 
