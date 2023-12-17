@@ -1,0 +1,23 @@
+- name: install zsh
+  apt: name=zsh
+  tags: &tags_zsh_tasks ['install', 'productivity', 'dotfiles', 'zsh']
+- name: change shell to zsh
+  shell: chsh -s $(which zsh)
+  tags: *tags_zsh_tasks
+- name: check omzsh
+  stat:
+    path: "~/.oh-my-zsh"
+  register: oh_my_stats
+  tags: *tags_zsh_tasks
+- name: oh my zsh
+  #shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  tags: *tags_zsh_tasks
+  when: oh_my_stats.stat.exists == False
+- name: install powerlevel10k
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{lookup('env', 'ZSHCUSTOM')|default('~/.oh-my-zsh/custom', true) }}/themes/powerlevel10k"
+    depth: 1
+  tags:  *tags_zsh_tasks
+

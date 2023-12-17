@@ -1,0 +1,13 @@
+- name: install git
+  apt: name=git
+  tags: 
+  - "git"
+  - "install"
+- name: git personal name
+  git_config:
+    name: user.name
+    scope: global
+    value: "Jojor"
+  tags: 
+  - "git"
+  - "git-personal"
