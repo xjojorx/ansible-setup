@@ -1,0 +1,13 @@
+- name: install stow
+  apt: name=stow
+  tags:
+    - "dotfiles"
+- name: clone dotfiles
+  ansible.builtin.git:
+    repo: https://github.com/xjojorx/.dotfiles.git
+    dest: "~/.dotfiles"
+- name: unstow dotfiles
+  ansible.builtin.command: stow *
+  args:
+    chdir: ~/.dotfiles/
+

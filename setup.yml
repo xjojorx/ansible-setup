@@ -13,6 +13,6 @@
   tasks:
     - include: tasks/git.yml
     - include: tasks/zsh.yml
-      #- include: dotfiles.yml
-      #- include: tasks/nvim.yml
+    - include: tasks/dotfiles.yml
+    #- include: tasks/nvim.yml
 
