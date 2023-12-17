@@ -11,3 +11,11 @@
   tags: 
   - "git"
   - "git-personal"
+- name: git editor nvim
+  git_config: 
+    name: core.editor
+    scope: global
+    value: nvim
+  tags: 
+  - "git"
+  - "git-personal"
