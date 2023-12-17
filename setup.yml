@@ -7,9 +7,20 @@
       force_apt_get: true
       update_cache: true
       state: present
+    when: ansible_distribution == "Ubuntu"
     tags:
       - install
       - core
+      - ubuntu
+  - name: Update Package Cache (dnf/CentOS)
+    dnf:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+    tags:
+      - install
+      - core
+      - ubuntu
   tasks:
     - include: tasks/git.yml
     - include: tasks/zsh.yml

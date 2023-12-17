@@ -1,5 +1,5 @@
 - name: install git
-  apt: name=git
+  ansible.builtin.package: name=git
   tags: 
   - "git"
   - "install"
